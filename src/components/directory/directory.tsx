@@ -1,7 +1,9 @@
-import React, {FC} from "react";
+import {FC} from "react";
+
 import {CategoryItem} from '../category-item/category-item';
+import {Category} from "../../interfaces/category.interface";
+
 import './directory.styles.scss';
-import {Category} from "../../App";
 
 interface DirectoryProps {
   categories: Category[];

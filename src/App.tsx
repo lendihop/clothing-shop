@@ -1,16 +1,23 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
+
 import { Routes, Route } from 'react-router-dom';
-import {Home} from './routes/home';
+
+import {Home} from './routes/home/home';
+import {Navigation} from './routes/navigation/navigation';
+
 import './App.css';
 
-export interface Category {
-  id: number;
-  title: string;
-  imageUrl: string;
-}
+const Shop = () => {
+  return <h1>I am the shop page</h1>;
+};
 
 export const App: FC = () => {
-  return <Routes>
-    <Route path='/' index element={<Home />} />
-  </Routes>;
+  return (
+    <Routes>
+      <Route path='/' element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path='shop' element={<Shop />} />
+      </Route>
+    </Routes>
+  );
 }

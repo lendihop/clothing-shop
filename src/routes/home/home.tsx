@@ -1,5 +1,8 @@
-import {Directory} from '../components/directory/directory';
-import {Category} from "../App";
+import {FC} from "react";
+import {Outlet} from "react-router-dom";
+
+import {Directory} from '../../components/directory/directory';
+import {Category} from "../../interfaces/category.interface";
 
 const categories: Category[] = [
   {
@@ -29,6 +32,11 @@ const categories: Category[] = [
   },
 ];
 
-export const Home = () => {
-  return <Directory categories={categories} />;
+export const Home: FC = () => {
+  return (
+    <div>
+      <Directory categories={categories} />
+      <Outlet />
+    </div>
+  );
 };
