@@ -2,19 +2,19 @@ import {ButtonHTMLAttributes, FC, PropsWithChildren} from "react";
 
 import './button.styles.scss';
 
-enum BUTTON_TYPE_CLASSNAMES {
+export enum BUTTON_TYPES {
   GOOGLE = 'google-sign-in',
   INVERTED = 'inverted'
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonTypeClassName?: BUTTON_TYPE_CLASSNAMES;
+  buttonType?: BUTTON_TYPES;
 }
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, buttonTypeClassName, ...otherProps }) => {
+export const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, buttonType, ...otherProps }) => {
   return (
     <button
-      className={`button-container ${buttonTypeClassName}`}
+      className={`button-container ${buttonType}`}
       {...otherProps}
     >
       {children}
