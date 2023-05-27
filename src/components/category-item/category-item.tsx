@@ -1,11 +1,11 @@
 import {FC} from "react";
 
-import {Category} from "../../interfaces/category.interface";
+import {CategoryInterface} from "../../interfaces/category.interface";
 
 import './category-item.styles.scss';
 
 interface CategoryItemProps {
-  category: Category;
+  category: CategoryInterface;
 }
 
 export const CategoryItem: FC<CategoryItemProps> = ({category}) => {

@@ -2,9 +2,9 @@ import {FC} from "react";
 import {Outlet} from "react-router-dom";
 
 import {Directory} from '../../components/directory/directory';
-import {Category} from "../../interfaces/category.interface";
+import {CategoryInterface} from "../../interfaces/category.interface";
 
-const categories: Category[] = [
+const categories: CategoryInterface[] = [
   {
     id: 1,
     title: 'hats',

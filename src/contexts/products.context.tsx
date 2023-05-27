@@ -1,24 +1,18 @@
 import {createContext, FC, PropsWithChildren, useState} from 'react';
 
 import PRODUCTS from '../shop-data.json';
+import {ProductInterface} from "../interfaces/product.interface";
 
-export interface Product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
+interface ProductContextInterface {
+  products: ProductInterface[]
 }
 
-interface ProductContextType {
-  products: Product[]
-}
-
-export const ProductsContext = createContext<ProductContextType>({
+export const ProductsContext = createContext<ProductContextInterface>({
   products: [],
 });
 
 export const ProductsProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [products] = useState<Product[]>(PRODUCTS);
+  const [products] = useState<ProductInterface[]>(PRODUCTS);
   const value = { products };
 
   return (

@@ -1,12 +1,12 @@
 import {FC} from "react";
 
 import {CategoryItem} from '../category-item/category-item';
-import {Category} from "../../interfaces/category.interface";
+import {CategoryInterface} from "../../interfaces/category.interface";
 
 import './directory.styles.scss';
 
 interface DirectoryProps {
-  categories: Category[];
+  categories: CategoryInterface[];
 }
 
 export const Directory: FC<DirectoryProps> = ({ categories }) => {
