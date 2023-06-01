@@ -9,7 +9,16 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  collection,
+  query,
+} from 'firebase/firestore';
+import {ProductInterface} from "../interfaces/product.interface";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCaM0tf6aqdKGb1QBaS6ureiAEA6TcpRWU",
@@ -32,6 +41,22 @@ export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
+
+export const getCategoriesAndDocuments = async (path: string) => {
+  const collectionRef = collection(db, path);
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs<Record<string, ProductInterface[]>>(q);
+
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    // @ts-ignore
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
