@@ -1,6 +1,6 @@
 import {FC, InputHTMLAttributes} from "react";
+import {FormInputLabel, Group, Input} from "./form-input.styles";
 
-import './form-input.styles.scss';
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
@@ -9,17 +9,13 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
   return (
-    <div className='group'>
-      <input className='form-input' {...otherProps} />
+    <Group>
+      <Input {...otherProps} />
       {label && (
-        <label
-          className={`${
-            otherProps.value.length ? 'shrink' : ''
-          } form-input-label`}
-        >
+        <FormInputLabel shrink={Boolean(otherProps.value.length)}>
           {label}
-        </label>
+        </FormInputLabel>
       )}
-    </div>
+    </Group>
   );
 };
