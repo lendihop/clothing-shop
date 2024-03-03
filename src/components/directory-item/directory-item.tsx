@@ -1,16 +1,17 @@
-import {FC} from "react";
+import { FC } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
-import {CategoryInterface} from "../../interfaces/category.interface";
+import { CategoryInterface } from 'interfaces/category.interface';
 
-import {BackgroundImage, Body, DirectoryItemContainer} from "./directory-item.styles";
+import { BackgroundImage, Body, DirectoryItemContainer } from './directory-item.styles';
 
 interface DirectoryItemProps {
   category: CategoryInterface;
 }
 
-export const DirectoryItem: FC<DirectoryItemProps> = ({category}) => {
-  const {title, imageUrl, route} = category;
+export const DirectoryItem: FC<DirectoryItemProps> = ({ category }) => {
+  const { title, imageUrl, route } = category;
   const navigate = useNavigate();
 
   const onNavigateHandler = () => navigate(route);
@@ -24,4 +25,4 @@ export const DirectoryItem: FC<DirectoryItemProps> = ({category}) => {
       </Body>
     </DirectoryItemContainer>
   );
-}
+};

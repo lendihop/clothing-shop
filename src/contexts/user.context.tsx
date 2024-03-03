@@ -1,15 +1,17 @@
-import {createContext, FC, PropsWithChildren, useEffect, useState} from "react";
-import {User} from "firebase/auth";
-import {createUserDocumentFromAuth, onAuthStateChangedListener} from "../utils/firebase.utils";
+import { createContext, FC, PropsWithChildren, useEffect, useState } from 'react';
 
-interface UserContextInterface{
-  currentUser: User | null,
-  setCurrentUser: (value: User | null) => void,
+import { User } from 'firebase/auth';
+
+import { createUserDocumentFromAuth, onAuthStateChangedListener } from 'utils/firebase.utils';
+
+interface UserContextInterface {
+  currentUser: User | null;
+  setCurrentUser: (value: User | null) => void;
 }
 
 export const UserContext = createContext<UserContextInterface>({
   currentUser: null,
-  setCurrentUser: () => null,
+  setCurrentUser: () => null
 });
 
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {

@@ -1,14 +1,14 @@
-import {createContext, FC, PropsWithChildren, useEffect, useState} from 'react';
+import { createContext, FC, PropsWithChildren, useEffect, useState } from 'react';
 
-import {getCategoriesAndDocuments} from "../utils/firebase.utils";
-import {ProductInterface} from "../interfaces/product.interface";
+import { ProductInterface } from 'interfaces/product.interface';
+import { getCategoriesAndDocuments } from 'utils/firebase.utils';
 
 interface CategoriesContextInterface {
-  categoriesMap: Record<string, ProductInterface[]>
+  categoriesMap: Record<string, ProductInterface[]>;
 }
 
 export const CategoriesContext = createContext<CategoriesContextInterface>({
-  categoriesMap: {},
+  categoriesMap: {}
 });
 
 export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -24,9 +24,5 @@ export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   const value = { categoriesMap };
-  return (
-    <CategoriesContext.Provider value={value}>
-      {children}
-    </CategoriesContext.Provider>
-  );
+  return <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>;
 };

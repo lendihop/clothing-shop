@@ -1,6 +1,6 @@
-import {ButtonHTMLAttributes, FC, PropsWithChildren} from "react";
+import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
 
-import {BaseButton, GoogleSignInButton, InvertedButton} from "./button.styles";
+import { BaseButton, GoogleSignInButton, InvertedButton } from './button.styles';
 
 export enum BUTTON_TYPES {
   BASE = 'base',
@@ -12,8 +12,8 @@ const getButton = (buttonType = BUTTON_TYPES.BASE) =>
   ({
     [BUTTON_TYPES.BASE]: BaseButton,
     [BUTTON_TYPES.GOOGLE]: GoogleSignInButton,
-    [BUTTON_TYPES.INVERTED]: InvertedButton,
-  }[buttonType]);
+    [BUTTON_TYPES.INVERTED]: InvertedButton
+  })[buttonType];
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: BUTTON_TYPES;

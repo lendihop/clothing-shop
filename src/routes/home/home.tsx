@@ -1,7 +1,8 @@
-import {FC} from "react";
-import {Outlet} from "react-router-dom";
+import { FC } from 'react';
 
-import {Directory} from '../../components/directory/directory';
+import { Outlet } from 'react-router-dom';
+
+import { Directory } from 'components/directory/directory';
 
 export const Home: FC = () => {
   return (

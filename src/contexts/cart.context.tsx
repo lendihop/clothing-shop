@@ -1,17 +1,14 @@
 import { createContext, FC, PropsWithChildren, useEffect, useState } from 'react';
-import { CartItemInterface } from "../interfaces/cart-item.interface";
-import { ProductInterface } from "../interfaces/product.interface";
+
+import { CartItemInterface } from 'interfaces/cart-item.interface';
+import { ProductInterface } from 'interfaces/product.interface';
 
 export const addCartItem = (cartItems: CartItemInterface[], productToAdd: ProductInterface) => {
-  const existingCartItem = cartItems.find(
-    cartItem => cartItem.id === productToAdd.id
-  );
+  const existingCartItem = cartItems.find(cartItem => cartItem.id === productToAdd.id);
 
   if (existingCartItem) {
     return cartItems.map(cartItem =>
-      cartItem.id === productToAdd.id
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem
+      cartItem.id === productToAdd.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
     );
   }
 
@@ -19,23 +16,19 @@ export const addCartItem = (cartItems: CartItemInterface[], productToAdd: Produc
 };
 
 const removeCartItem = (cartItems: CartItemInterface[], cartItemToRemove: CartItemInterface) => {
-  const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === cartItemToRemove.id
-  );
+  const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToRemove.id);
 
   if (existingCartItem?.quantity === 1) {
-    return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
+    return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
   }
 
-  return cartItems.map((cartItem) =>
-    cartItem.id === cartItemToRemove.id
-      ? { ...cartItem, quantity: cartItem.quantity - 1 }
-      : cartItem
+  return cartItems.map(cartItem =>
+    cartItem.id === cartItemToRemove.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
   );
 };
 
 const clearCartItem = (cartItems: CartItemInterface[], cartItemToClear: CartItemInterface) =>
-  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+  cartItems.filter(cartItem => cartItem.id !== cartItemToClear.id);
 
 interface CartContextInterface {
   isCartOpened: boolean;
@@ -56,7 +49,7 @@ export const CartContext = createContext<CartContextInterface>({
   removeItemToCart: () => {},
   clearItemFromCart: () => {},
   cartCount: 0,
-  cartTotal: 0,
+  cartTotal: 0
 });
 
 export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -66,18 +59,12 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    const count = cartItems.reduce(
-      (total, cartItem) => total + cartItem.quantity,
-      0
-    );
+    const count = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
     setCartCount(count);
   }, [cartItems]);
 
   useEffect(() => {
-    const newCartTotal = cartItems.reduce(
-      (total, cartItem) => total + cartItem.quantity * cartItem.price,
-      0
-    );
+    const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0);
     setCartTotal(newCartTotal);
   }, [cartItems]);
 
@@ -89,8 +76,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     setCartItems(clearCartItem(cartItems, cartItemToClear));
   };
 
-  const addItemToCart = (product: ProductInterface) =>
-    setCartItems(addCartItem(cartItems, product));
+  const addItemToCart = (product: ProductInterface) => setCartItems(addCartItem(cartItems, product));
 
   const value = {
     isCartOpened,
@@ -100,7 +86,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     removeItemToCart,
     clearItemFromCart,
     cartCount,
-    cartTotal,
+    cartTotal
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

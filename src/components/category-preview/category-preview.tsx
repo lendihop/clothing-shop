@@ -1,8 +1,9 @@
-import {FC} from "react";
-import {Link} from "react-router-dom";
+import { FC } from 'react';
 
-import {ProductInterface} from "../../interfaces/product.interface";
-import {ProductCard} from "../product-card/product-card";
+import { Link } from 'react-router-dom';
+
+import { ProductCard } from 'components/product-card/product-card';
+import { ProductInterface } from 'interfaces/product.interface';
 
 import './category-preview.styles.scss';
 
@@ -12,16 +13,16 @@ interface CategoryPreviewProps {
 }
 
 export const CategoryPreview: FC<CategoryPreviewProps> = ({ title, products }) => (
-  <div className='category-preview-container'>
+  <div className="category-preview-container">
     <h2>
-      <Link className='title' to={title}>
+      <Link className="title" to={title}>
         {title.toUpperCase()}
       </Link>
     </h2>
-    <div className='preview'>
+    <div className="preview">
       {products
         .filter((_, idx) => idx < 4)
-        .map((product) => (
+        .map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
     </div>

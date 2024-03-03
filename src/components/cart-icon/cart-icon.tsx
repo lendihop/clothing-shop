@@ -1,8 +1,8 @@
-import {FC, useContext} from 'react';
+import { FC, useContext } from 'react';
 
 import { CartContext } from '../../contexts/cart.context';
 
-import {CartIconContainer, ItemCount, ShoppingIcon} from "./cart-icon.styles";
+import { CartIconContainer, ItemCount, ShoppingIcon } from './cart-icon.styles';
 
 export const CartIcon: FC = () => {
   const { isCartOpened, setIsCartOpened, cartCount } = useContext(CartContext);
@@ -11,7 +11,7 @@ export const CartIcon: FC = () => {
 
   return (
     <CartIconContainer onClick={toggleIsCartOpen}>
-      <ShoppingIcon className='shopping-icon' />
+      <ShoppingIcon className="shopping-icon" />
       <ItemCount>{cartCount}</ItemCount>
     </CartIconContainer>
   );
