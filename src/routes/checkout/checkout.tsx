@@ -1,12 +1,14 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { CheckoutItem } from 'components/checkout-item/checkout-item';
-import { CartContext } from 'contexts/cart.context';
+import { useCartStore } from 'store/cart';
+import { cartItemsSelector, cartTotalSelector } from 'store/cart/selectors';
 
 import './checkout.styles.scss';
 
 export const Checkout: FC = () => {
-  const { cartItems, cartTotal } = useContext(CartContext);
+  const cartItems = useCartStore(cartItemsSelector);
+  const cartTotal = useCartStore(cartTotalSelector);
 
   return (
     <div className="checkout-container">

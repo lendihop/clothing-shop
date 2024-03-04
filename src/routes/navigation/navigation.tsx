@@ -1,19 +1,21 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
 import { ReactComponent as CrownLogo } from 'assets/crown.svg';
 import { CartDropdown } from 'components/cart-dropdown/cart-dropdown';
 import { CartIcon } from 'components/cart-icon/cart-icon';
-import { CartContext } from 'contexts/cart.context';
-import { UserContext } from 'contexts/user.context';
+import { useCartStore } from 'store/cart';
+import { isCartOpenedSelector } from 'store/cart/selectors';
+import { useUserStore } from 'store/user';
+import { currentUserSelector } from 'store/user/selectors';
 import { signOutUser } from 'utils/firebase.utils';
 
 import { LogoContainer, NavButton, NavigationContainer, NavLink, NavLinks } from './navigation.styles';
 
 export const Navigation: FC = () => {
-  const { currentUser } = useContext(UserContext);
-  const { isCartOpened } = useContext(CartContext);
+  const currentUser = useUserStore(currentUserSelector);
+  const isCartOpened = useCartStore(isCartOpenedSelector);
 
   return (
     <>

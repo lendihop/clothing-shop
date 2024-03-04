@@ -1,10 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { CategoryPreview } from 'components/category-preview/category-preview';
-import { CategoriesContext } from 'contexts/categories.context';
+import { useCategoriesStore } from 'store/categories';
+import { categoriesMapSelector } from 'store/categories/selectors';
 
 export const CategoriesPreview: FC = () => {
-  const { categoriesMap } = useContext(CategoriesContext);
+  const categoriesMap = useCategoriesStore(categoriesMapSelector);
 
   return (
     <>

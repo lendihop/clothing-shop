@@ -1,8 +1,9 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { Button, BUTTON_TYPES } from 'components/button/button';
-import { CartContext } from 'contexts/cart.context';
 import { ProductInterface } from 'interfaces/product.interface';
+import { useCartStore } from 'store/cart';
+import { addItemToCartSelector } from 'store/cart/selectors';
 
 import './product-card.styles.scss';
 
@@ -12,7 +13,7 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(CartContext);
+  const addItemToCart = useCartStore(addItemToCartSelector);
 
   const addProductToCart = () => addItemToCart(product);
 

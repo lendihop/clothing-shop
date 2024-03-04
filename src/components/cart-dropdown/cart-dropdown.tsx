@@ -1,16 +1,16 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { CartContext } from 'contexts/cart.context';
-
-import { Button } from '../button/button';
-import { CartItem } from '../cart-item/cart-item';
+import { Button } from 'components/button/button';
+import { CartItem } from 'components/cart-item/cart-item';
+import { useCartStore } from 'store/cart';
+import { cartItemsSelector } from 'store/cart/selectors';
 
 import { CartDropdownContainer, CartItems, EmptyMessage } from './cart-dropdown.styles';
 
 export const CartDropdown: FC = () => {
-  const { cartItems } = useContext(CartContext);
+  const cartItems = useCartStore(cartItemsSelector);
   const navigate = useNavigate();
 
   const goToCheckoutHandler = () => {

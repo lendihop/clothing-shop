@@ -1,7 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
-import { CartContext } from 'contexts/cart.context';
 import { CartItemInterface } from 'interfaces/cart-item.interface';
+import { useCartStore } from 'store/cart';
+import { addItemToCartSelector, clearItemFromCartSelector, removeItemFromCartSelector } from 'store/cart/selectors';
 
 import './checkout-item.styles.scss';
 
@@ -12,7 +13,9 @@ interface CheckoutItemProps {
 export const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
-  const { clearItemFromCart, addItemToCart, removeItemToCart } = useContext(CartContext);
+  const addItemToCart = useCartStore(addItemToCartSelector);
+  const removeItemToCart = useCartStore(removeItemFromCartSelector);
+  const clearItemFromCart = useCartStore(clearItemFromCartSelector);
 
   const clearItemHandler = () => clearItemFromCart(cartItem);
   const addItemHandler = () => addItemToCart(cartItem);

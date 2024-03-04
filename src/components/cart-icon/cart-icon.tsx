@@ -1,11 +1,14 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
-import { CartContext } from '../../contexts/cart.context';
+import { useCartStore } from 'store/cart';
+import { cartCountSelector, isCartOpenedSelector, setIsCartOpenedSelector } from 'store/cart/selectors';
 
 import { CartIconContainer, ItemCount, ShoppingIcon } from './cart-icon.styles';
 
 export const CartIcon: FC = () => {
-  const { isCartOpened, setIsCartOpened, cartCount } = useContext(CartContext);
+  const cartCount = useCartStore(cartCountSelector);
+  const isCartOpened = useCartStore(isCartOpenedSelector);
+  const setIsCartOpened = useCartStore(setIsCartOpenedSelector);
 
   const toggleIsCartOpen = () => setIsCartOpened(!isCartOpened);
 
