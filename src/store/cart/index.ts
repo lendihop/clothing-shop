@@ -1,44 +1,53 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 import { CartItemInterface } from 'interfaces/cart-item.interface';
 import { ProductInterface } from 'interfaces/product.interface';
 
 import { CartStore } from './interfaces';
 
-export const useCartStore = create<CartStore>(set => ({
-  isCartOpened: false,
-  cartCount: 0,
-  cartTotal: 0,
-  cartItems: [],
-  setIsCartOpened: isCartOpened => set(state => ({ ...state, isCartOpened })),
-  addItemToCart: newItem =>
-    set(state => {
-      const newCartItems = addCartItem(state.cartItems, newItem);
+export const useCartStore = create<CartStore>()(
+  persist(
+    set => ({
+      isCartOpened: false,
+      cartCount: 0,
+      cartTotal: 0,
+      cartItems: [],
+      setIsCartOpened: isCartOpened => set(state => ({ ...state, isCartOpened })),
+      addItemToCart: newItem =>
+        set(state => {
+          const newCartItems = addCartItem(state.cartItems, newItem);
 
-      return {
-        ...state,
-        ...getUpdatedState(newCartItems)
-      };
+          return {
+            ...state,
+            ...getUpdatedState(newCartItems)
+          };
+        }),
+      removeItemFromCart: itemToRemove =>
+        set(state => {
+          const newCartItems = removeCartItem(state.cartItems, itemToRemove);
+
+          return {
+            ...state,
+            ...getUpdatedState(newCartItems)
+          };
+        }),
+      clearItemFromCart: itemToClear =>
+        set(state => {
+          const newCartItems = clearCartItem(state.cartItems, itemToClear);
+
+          return {
+            ...state,
+            ...getUpdatedState(newCartItems)
+          };
+        })
     }),
-  removeItemFromCart: itemToRemove =>
-    set(state => {
-      const newCartItems = removeCartItem(state.cartItems, itemToRemove);
-
-      return {
-        ...state,
-        ...getUpdatedState(newCartItems)
-      };
-    }),
-  clearItemFromCart: itemToClear =>
-    set(state => {
-      const newCartItems = clearCartItem(state.cartItems, itemToClear);
-
-      return {
-        ...state,
-        ...getUpdatedState(newCartItems)
-      };
-    })
-}));
+    {
+      name: 'cart-storage',
+      version: 1
+    }
+  )
+);
 
 const addCartItem = (cartItems: CartItemInterface[], productToAdd: ProductInterface) => {
   const existingCartItem = cartItems.find(cartItem => cartItem.id === productToAdd.id);
