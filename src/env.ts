@@ -1,0 +1,3 @@
+export const EnvVars = {
+  REACT_APP_STRIPE_PUBLISHABLE_KEY: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!
+} as const;

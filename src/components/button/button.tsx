@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
 
-import { BaseButton, GoogleSignInButton, InvertedButton } from './button.styles';
+import { BaseButton, GoogleSignInButton, InvertedButton, LoadingSpinner } from './button.styles';
 
 export enum BUTTON_TYPES {
   BASE = 'base',
@@ -16,10 +16,20 @@ const getButton = (buttonType = BUTTON_TYPES.BASE) =>
   })[buttonType];
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean;
   buttonType?: BUTTON_TYPES;
 }
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, buttonType, ...otherProps }) => {
+export const Button: FC<PropsWithChildren<ButtonProps>> = ({
+  children,
+  buttonType,
+  isLoading = false,
+  ...otherProps
+}) => {
   const CustomButton = getButton(buttonType);
-  return <CustomButton {...otherProps}>{children}</CustomButton>;
+  return (
+    <CustomButton disabled={isLoading} {...otherProps}>
+      {isLoading ? <LoadingSpinner /> : children}
+    </CustomButton>
+  );
 };
