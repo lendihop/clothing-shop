@@ -5,7 +5,7 @@ import { ProductInterface } from 'interfaces/product.interface';
 import { useCartStore } from 'store/cart';
 import { addItemToCartSelector } from 'store/cart/selectors';
 
-import './product-card.styles.scss';
+import { ProductCardContainer, ProductCardFooter, ProductCardName, ProductCardPrice } from './product-card.styles';
 
 interface ProductCardProps {
   product: ProductInterface;
@@ -18,15 +18,15 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const addProductToCart = () => addItemToCart(product);
 
   return (
-    <div className="product-card-container">
+    <ProductCardContainer>
       <img src={imageUrl} alt={`${name}`} />
-      <div className="footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
+      <ProductCardFooter>
+        <ProductCardName>{name}</ProductCardName>
+        <ProductCardPrice>{price}</ProductCardPrice>
+      </ProductCardFooter>
       <Button buttonType={BUTTON_TYPES.INVERTED} onClick={addProductToCart}>
         Add to card
       </Button>
-    </div>
+    </ProductCardContainer>
   );
 };

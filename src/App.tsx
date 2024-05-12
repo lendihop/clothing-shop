@@ -11,8 +11,6 @@ import { useUserStore } from 'store/user';
 import { setCurrentUserSelector } from 'store/user/selectors';
 import { createUserDocumentFromAuth, onAuthStateChangedListener } from 'utils/firebase.utils';
 
-import './App.css';
-
 export const App: FC = () => {
   const setCurrentUser = useUserStore(setCurrentUserSelector);
 
